@@ -20,9 +20,9 @@ npm i d-danfe-jti
 
 Este pacote suporta tanto URLs de logos quanto arquivos locais.
 ```javascript
+const danfe = require('d-danfe-jti');
 const logo = 'URL da logomarca da empresa'; // Opcional. Caso não seja informado, o campo ficará vazio.
-const danfe = require('d-danfe', logo);
-const Danfe = danfe.fromXML('conteúdo XML');
+const Danfe = danfe.fromXML('conteúdo XML', logo);
 console.log(Danfe.toHtml());
 
 ```
@@ -30,15 +30,14 @@ console.log(Danfe.toHtml());
 
 Passando um arquivo de logo local, sempre passar o caminho absoluto
 ```javascript
+const danfe = require('d-danfe-jti');
 const path = require('path')
 
 const logo = path.join(__dirname, '/usr/img.logo.png'); // Opcional. Caso não seja informado, o campo ficará vazio.
-const danfe = require('d-danfe', logo);
-const Danfe = danfe.fromXML('conteúdo XML');
+const Danfe = danfe.fromXML('conteúdo XML', logo);
 console.log(Danfe.toHtml());
 
 ```
-
 ## Especificações
 
 ### Funções
