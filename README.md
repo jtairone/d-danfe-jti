@@ -28,6 +28,17 @@ console.log(Danfe.toHtml());
 ```
 **Dica:** Recomenda-se utilizar serviços como o [Postimage]('https://postimages.org/') para hospedar sua logomarca e fornecer o URL direto da imagem. 
 
+Passando um arquivo de logo local, sempre passar o caminho absoluto
+```javascript
+const path = require('path')
+
+const logo = path.join(__dirname, '/usr/img.logo.png'); // Opcional. Caso não seja informado, o campo ficará vazio.
+const danfe = require('d-danfe', logo);
+const Danfe = danfe.fromXML('conteúdo XML');
+console.log(Danfe.toHtml());
+
+```
+
 ## Especificações
 
 ### Funções

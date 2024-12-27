@@ -1,6 +1,6 @@
 {
   "name": "d-danfe-jti",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Visualizador de DANFE em HTML",
   "main": "src/index.js",
   "scripts": {

@@ -2,6 +2,7 @@ const handlebars = require('handlebars')
 const NFe = require('d-nfe')
 const TEMPLATE_DANFE = __dirname + '/template-danfe.hbs'
 const fs = require('fs')
+const path = require('path')
 const isUrl = require('is-url')
 /**
  * Retorna <valor> especificado com máscara do CPF.
@@ -294,7 +295,7 @@ function renderHtml(data) {
  */
 function imageToBase64(filePath) {
   try {
-    const fileBuffer = fs.readFileSync(filePath);
+    const fileBuffer = fs.readFileSync(path.resolve(filePath));
     const base64Image = fileBuffer.toString('base64');
     const mimeType = path.extname(filePath).replace('.', '');
     return `data:image/${mimeType};base64,${base64Image}`;
