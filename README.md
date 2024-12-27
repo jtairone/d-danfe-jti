@@ -1,6 +1,6 @@
 # d-danfe-jti
 
-Este projeto é um fork de [d-danfe]('https://www.npmjs.com/package/d-danfe') fiz somente umas melhorias para poder enviar o link do logo e ajuste de tamanho da imagem automaticamente para um tamanho predefinido
+Este projeto é um fork de [d-danfe]('https://www.npmjs.com/package/d-danfe') com melhorias para suportar links de logos e ajuste automático do tamanho da imagem para um tamanho predefinido.
 #
 Visualizador de DANFE (Documento Auxiliar Da Nota Fiscal Eletrônica) em HTML.
 
@@ -8,7 +8,7 @@ Visualizador de DANFE (Documento Auxiliar Da Nota Fiscal Eletrônica) em HTML.
 
 ### Pré-requisitos
 
-NodeJS 8.x
+NodeJS 8.x ou superior
 
 ### Instalação
 
@@ -16,39 +16,39 @@ NodeJS 8.x
 npm i d-danfe-jti
 ```
 
-### Exemplos
+### Exemplos de Uso
 
-Tanto pode passar a URL do logo quanto informar um arquivo local.
+Este pacote suporta tanto URLs de logos quanto arquivos locais.
+```javascript
+const logo = 'URL da logomarca da empresa'; // Opcional. Caso não seja informado, o campo ficará vazio.
+const danfe = require('d-danfe', logo);
+const Danfe = danfe.fromXML('conteúdo XML');
+console.log(Danfe.toHtml());
+
 ```
-const logo = 'URL logomarca empresa'
-//opcional passar o logo se não enviar fica vazio
-const danfe = require('d-danfe', logo)
-const Danfe = danfe.fromXML('conteudo XML')
-console.log(Danfe.toHtml())
-```
-* recomendo utilizar o [Postimage](https://postimages.org/) publicar online a imagem e passar o url direta do logo 
+**Dica:** Recomenda-se utilizar serviços como o [Postimage]('https://postimages.org/') para hospedar sua logomarca e fornecer o URL direto da imagem. 
 
 ## Especificações
 
 ### Funções
 
-* Criar representação do DANFE em HTML baseado somente em um arquivo XML existente.
-* Criar a representação somente no formato retrato.
-* Possui contagem do número de folhas.
+* Gerar representação do DANFE em HTML a partir de um arquivo XML.
+* Formatação somente no formato retrato.
+* Contagem do número de folhas geradas.
 
 ### Limitações
 
-* Não converte para outros formatos como pdf e imagens (basta usar um conversor externo, ex.: [puppeteer](https://github.com/puppeteer/puppeteer/tree/main)).
-* Não valida os valores dos campos da NFE.
-* (TODO) Não possui geração do código de barras.
-* (TODO) Não possui quebra do número de folhas de acordo com a quantidade de itens.
-* (TODO) Não possui a representação em formato paisagem.
+* **Conversão para outros formatos (ex.: PDF ou imagens)**: Utilize ferramentas externas, como  [Puppeteer](https://github.com/puppeteer/puppeteer/tree/main).
+* **Validação dos campos da NFE:** Não há validação dos valores nos campos.
+* **TODO:** Não possui geração do código de barras.
+* **TODO:** Não possui quebra do número de folhas de acordo com a quantidade de itens.
+* **TODO:** Não possui a representação em formato paisagem.
 
 ## Testes
 
-```
+```bash
 npm run test
 ```
 ## Licença
 
-[MIT](https://github.com/djalmaoliveira/djf-danfe/blob/master/LICENSE)
+Este projeto é licenciado sob os termos da [Licença MIT.](https://github.com/djalmaoliveira/djf-danfe/blob/master/LICENSE)
