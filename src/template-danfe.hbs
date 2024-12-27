@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DANFE</title>
+<style>
+  html,
+  body,
+  p,
+  ol,
+  ul,
+  li,
+  dl,
+  dt,
+  dd,
+  blockquote,
+  figure,
+  fieldset,
+  legend,
+  textarea,
+  pre,
+  iframe,
+  hr,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: inherit;
+  }
+
+  .container {
+    margin: 0 auto;
+    position: relative;
+    max-width: 960px;
+  }
+
+  .columns {
+    display: flex;
+    margin-top: -0.75rem;
+  }
+
+  .column {
+    display: block;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+  }
+
+  .columns:not(:last-child) {
+    margin-bottom: calc(1.5rem - 0.75rem);
+  }
+
+  .is-pulled-right {
+    float: right !important;
+  }
+
+  .is-pulled-left {
+    float: left !important;
+  }
+
+  .column.is-1 {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    width: 8.33333%;
+  }
+
+  .column.is-2 {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    width: 16%;
+  }
+
+  span {
+    font-style: inherit;
+    font-weight: inherit;
+  }
+
+  *:before,
+  *:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+
+  table {
+    border: 0.5px solid black;
+    border-spacing: 0;
+    border-radius: 5px;
+  }
+
+  td {
+    border-top: 0.5px solid black;
+  }
+
+  td:not(:first-child),
+  th:not(:first-child) {
+    border-left: 0.5px solid black;
+  }
+
+  td,
+  th {
+    padding: 0;
+    text-align: left;
+  }
+
+  .content.is-small {
+    font-size: 0.75rem;
+  }
+
+  .content.is-medium {
+    font-size: 1.25rem;
+  }
+
+  .content.is-large {
+    font-size: 1.5rem;
+  }
+</style>
+<style>
+  html,
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 5px;
+    margin-top: 5px;
+    line-height: 1;
+    color: black !important;
+    font-size: 11px;
+    font-weight: 500 !important;
+  }
+
+  .area {
+    width: 778px !important;
+  }
+
+  .quadro_codigo_barra {
+    padding: 0px !important;
+  }
+
+  .codigo_barra {
+    height: 56px;
+  }
+
+  .chave {
+    height: 33px;
+    font-size: 82%;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .protocolo,
+  .consulta,
+  .chave {
+    padding: 2px;
+  }
+
+  .protocolo {
+    flex: 0 0 296px;
+  }
+
+  .codigo_barra,
+  .chave {
+    border-bottom: 1px solid black;
+  }
+
+  .consulta {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .quadro_danfe {
+    flex: 0 0 96px;
+    line-height: 1.1;
+  }
+
+  .quadro_identificacao {
+    flex: 0 0 378px;
+    font-weight: bold;
+    font-size: 13px
+  }
+
+  .quadro_cabecalho {
+    height: 149px !important;
+  }
+
+  div.quadro div.columns:nth-child(2) {
+    border-top: 1px solid black;
+  }
+
+  div.quadro div.columns:first-child div.column {
+    padding: 0px;
+  }
+
+  .linha div.column:first-child {
+    border-left: 1px solid black;
+  }
+
+  .quadro .linha div.column {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+  .conteudo_campo {
+    padding: 3px;
+  }
+
+  .quadro.imposto div.linha div.column div:nth-child(2),
+  .direita {
+    text-align: right;
+  }
+
+  .quadro div.columns:first-child div.column {
+    margin-top: 5px;
+  }
+
+  .grupo .quadro .linha {
+    height: 33px;
+  }
+
+  .grupo {
+    margin-top: 5px;
+  }
+
+  .tcampo {
+    font-weight: bold;
+    font-size: 8px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    text-align: left;
+  }
+
+  .texto_recibo {
+    font-size: 7pt;
+    text-align: left;
+  }
+
+  .all-rounded-corners {
+    border-radius: 5px;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .operacao {
+    font-size: 14px;
+    border: 1px solid black;
+    padding: 2px;
+  }
+
+  .numero,
+  .canhoto_nr {
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .danfe {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .itens {
+    font-size: 10px;
+  }
+
+
+  .data {
+    flex: 0 0 100px;
+    text-align: center;
+  }
+
+  .uf {
+    flex: 0 0 30px;
+  }
+
+  .placa {
+    flex: 0 0 70px;
+  }
+
+  .nome {
+    flex: 0 0 300px;
+  }
+
+  .fisco {
+    flex: 0 0 284px;
+  }
+
+  .complemento {
+    height: 114px !important;
+  }
+
+  .complemento {
+    font-size: 10px;
+  }
+
+  .canhoto_nr {
+    flex: 0 0 171px;
+  }
+
+  .area_canhoto_nr {
+    height: 65px;
+    border-left: 0px !important;
+    line-height: 1.5;
+    padding-left: 3px !important;
+  }
+
+  .canhoto_assinatura {
+    flex: 0 0 458px;
+  }
+
+  .duplicatas .duplicata {
+    font-size: 0.9rem;
+    padding: 3px;
+    border: 1px solid black;
+  }
+
+  .duplicatas .tcampo {
+    font-size: 0.8rem;
+    margin-top: 1px;
+  }
+
+  table td,
+  table th {
+    padding: 2px;
+  }
+
+  table {
+    margin-bottom: 1px;
+    width: 100%;
+  }
+
+  .dashed {
+    width: 100%;
+    border: 1px dashed rgba(128, 128, 128, 0.5);
+    margin: 5px 0 10px;
+  }
+
+  .top-left-round {
+    border-radius: 5px 0 0 0;
+  }
+
+  .top-right-round {
+    border-radius: 0 5px 0 0;
+  }
+
+  .bottom-left-round {
+    border-radius: 0 0 0 5px;
+  }
+
+  .bottom-right-round {
+    border-radius: 0 0 5px 0;
+  }
+
+  .padding-top {
+    padding-top: 3px;
+  }
+
+  .font-14 {
+    font-size: 14pt;
+  }
+
+  .font-10 {
+    font-size: 10pt;
+  }
+
+  .font-8 {
+    font-size: 8pt;
+  }
+
+  .font-6 {
+    font-size: 6pt;
+  }
+
+  .reset-marpads {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .reset-font {
+    font-weight: normal;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .margin-left {
+    margin-left: 3px;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .perfect-center {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .linha-menor {
+    height: 27px;
+  }
+
+  .bg-cover {
+    width: 90%;
+    height: 75%;
+    padding: 7px 15px;
+  }
+
+  .bg-logo {
+    /* --size: 45px;
+    width: var(--size);
+    height: var(--size); */
+    width: 94.5px;;
+    height: auto;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .reset-borders {
+    border: 0;
+  }
+
+  #reset-border-duplicata {
+    border-top: 0 solid white;
+  }
+
+  .dup-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .margin-right {
+    margin-right: 13px;
+  }
+
+  #reset-border-table {
+    border-top: 0 solid white;
+  }
+
+  .id-emitente {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .borderless {
+    border: 0px
+  }
+
+  .display-none {
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container area">
+
+    <!-- Canhoto  -->
+    <div class="columns grupo">
+      <div class="column ">
+        <div class="quadro">
+          <div class="columns">
+            <div class="column ">
+            </div>
+          </div>
+          <div class="columns linha all-rounded-corners">
+            <div class="column campo all-rounded-corners">
+              <div class="texto_recibo conteudo_campo">
+                RECEBEMOS DE '{{emitente.nome}}' OS PRODUTOS E/OU SERVIÇOS CONSTANTES DA NOTA FISCAL ELETRÔNICA INDICADA ABAIXO. EMISSÃO:
+                {{data_emissao}} - VALOR TOTAL: {{total_nota}} - DESTINATÁRIO: {{destinatario.nome}} - ENDEREÇO: {{destinatario.endereco}},
+                {{destinatario.numero}}, {{destinatario.bairro}} - {{destinatario.municipio}}/{{destinatario.uf}}
+              </div>
+            </div>
+          </div>
+          <div class="columns linha">
+            <div class="column all-rounded-corners padding-top">
+              <div class="tcampo reset-font">DATA DE RECEBIMENTO</div>
+            </div>
+            <div class="column canhoto_assinatura all-rounded-corners padding-top">
+              <div class="tcampo reset-font">IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column canhoto_nr">
+        <div class="quadro">
+          <div class="columns">
+            <div class="column">
+            </div>
+          </div>
+          <div class="columns linha all-rounded-corners">
+            <div class="column area_canhoto_nr all-rounded-corners">
+              <div class="center font-14">NF-e</div>
+              <div class="center font-10 reset-marpads">Nº {{numero}}</div>
+              <div class="center font-10 reset-marpads">Série: {{serie}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dashed" />
+
+    <table class="borderless">
+      <thead>
+        <tr>
+          <td class="borderless">
+            <!-- Cabeçalho  -->
+            <div class="cabecalho">
+              <div class="columns grupo">
+                <div class="column ">
+                  <div class="quadro">
+                    <div class="columns">
+                      <div class="column">
+                      </div>
+                    </div>
+                    <div class="columns linha quadro_cabecalho all-rounded-corners">
+                      <div class="column quadro_identificacao all-rounded-corners">
+                        <div class="conteudo_campo font-6 center reset-font">IDENTIFICAÇÃO DO EMITENTE</div>
+                        <div class="id-emitente">
+                          {{#if logo}}
+                          <div class="perfect-center flex-column">
+                            <img src="{{logo}}" class="bg-logo" />
+                          </div>
+                          {{/if}}
+
+                          <div class="perfect-center flex-column">
+                            <div class="conteudo_campo font-10 center reset-marpads">{{emitente.nome}}</div>
+                            <div class="conteudo_campo font-6 center reset-font reset-marpads">{{emitente.fantasia}}</div>
+                            <div class="conteudo_campo font-6 center reset-font reset-marpads">{{emitente.endereco}}, {{emitente.numero}}</div>
+                            <div class="conteudo_campo font-6 center reset-font reset-marpads">{{emitente.complemento}}</div>
+                            <div class="conteudo_campo font-6 center reset-font reset-marpads">{{emitente.bairro}} - {{emitente.municipio}}
+                              / {{emitente.uf}}</div>
+                            <div class="conteudo_campo font-6 center reset-font reset-marpads">{{emitente.cep}} - Fone: {{emitente.telefone}}</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="column quadro_danfe all-rounded-corners padding-top">
+                        <div class="center danfe font-14">DANFE</div>
+                        <div class="center font-6">Documento Auxiliar da Nota Fiscal Eletrônica</div>
+                        <br>
+                        <span class="numero center">
+                          <div class="center is-pulled-right operacao all-rounded-corners">{{operacao}}</div>
+                          <div class="align-left margin-left">
+                            <div class="reset-font">0- ENTRADA</div>
+                            <div class="reset-font">1- SAÍDA</div>
+                          </div>
+                          <br>
+                          <div>Nº {{numero}}</div>
+                          <div>Série {{serie}}</div>
+                          <div class="reset-font italic">Folha 1/1</div>
+                        </span>
+                      </div>
+                      <div class="column quadro_codigo_barra all-rounded-corners">
+                        <div class="codigo_barra all-rounded-corners">
+                          <svg id="barcode"></svg>
+                        </div>
+                        <div class="chave all-rounded-corners">
+                          <div class="tcampo reset-font">CHAVE DE ACESSO</div>
+                          <div class="padding-top">{{chave}}</div>
+                        </div>
+                        <div class="consulta all-rounded-corners">
+                          <br> Consulta de autenticidade no portal nacional da NF-e www.nfe.fazenda.gov.br/portal ou no site
+                          da Sefaz Autorizadora
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="columns grupo">
+                <div class="column ">
+                  <div class="quadro">
+                    <div class="columns">
+                      <div class="column ">
+                      </div>
+                    </div>
+                    <div class="columns linha all-rounded-corners">
+                      <div class="column campo all-rounded-corners padding-top">
+                        <div class="tcampo reset-font">NATUREZA DA OPERAÇÃO</div>
+                        <span class="conteudo_campo bold">{{natureza}}</span>
+                      </div>
+                      <div class="column protocolo all-rounded-corners">
+                        <div class="tcampo reset-font">PROTOCOLO DE AUTORIZACAO DE USO </div>
+                        <span class="conteudo_campo bold padding-top">{{protocolo}} - {{data_protocolo}}</span>
+                      </div>
+                    </div>
+                    <div class="columns linha">
+                      <div class="column all-rounded-corners center padding-top">
+                        <div class="tcampo reset-font">INSCRIÇÃO ESTADUAL</div>
+                        <span class="conteudo_campo bold">{{emitente.ie}}</span>
+                      </div>
+                      <div class="column all-rounded-corners center padding-top">
+                        <div class="tcampo reset-font">INSCRIÇÃO ESTADUAL DO SUBST. TRIB.</div>
+                        <span class="conteudo_campo bold">{{emitente.ie_st}}</span>
+                      </div>
+                      <div class="column all-rounded-corners center padding-top">
+                        <div class="tcampo reset-font">CNPJ</div>
+                        <span class="conteudo_campo bold">{{emitente.inscricao_nacional}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="borderless">
+          <td class="borderless">
+            <!-- Destinatário / Remetente -->
+            <div class="columns grupo">
+              <div class="column ">
+                <div class="quadro all-rounded-corners">
+                  <div class="columns padding-top">
+                    <div class="column bold">
+                      DESTINATÁRIO/REMETENTE
+                    </div>
+                  </div>
+                  <div class="columns linha all-rounded-corners">
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">NOME/RAZÃO SOCIAL</div>
+                      <span class="conteudo_campo bold">{{destinatario.nome}}</span>
+                    </div>
+                    <div class="column is-2 all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">CNPJ/CPF</div>
+                      <span class="conteudo_campo bold">{{destinatario.inscricao_nacional}}</span>
+                    </div>
+                    <div class="column data all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">DATA DA EMISSÃO</div>
+                      <span class="conteudo_campo bold">{{data_emissao}}</span>
+                    </div>
+                  </div>
+                  <div class="columns linha all-rounded-corners">
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">ENDEREÇO</div>
+                      <span class="conteudo_campo bold">{{destinatario.endereco}}, {{destinatario.numero}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">BAIRRO/DISTRITO</div>
+                      <span class="conteudo_campo bold">{{destinatario.bairro}}</span>
+                    </div>
+                    <div class="column all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">CEP</div>
+                      <span class="conteudo_campo bold">{{destinatario.cep}}</span>
+                    </div>
+                    <div class="column data all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">DATA SAÍDA/ENTRADA</div>
+                      <span class="conteudo_campo bold">{{data_saida}}</span>
+                    </div>
+                  </div>
+                  <div class="columns linha">
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">MUNICÍPIO</div>
+                      <span class="conteudo_campo bold">{{destinatario.municipio}}</span>
+                    </div>
+                    <div class="column uf all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">UF</div>
+                      <span class="conteudo_campo bold">{{destinatario.uf}}</span>
+                    </div>
+                    <div class="column all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">FONE/FAX</div>
+                      <span class="conteudo_campo bold">{{destinatario.telefone}}</span>
+                    </div>
+                    <div class="column all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">INSCRIÇÃO ESTADUAL</div>
+                      <span class="conteudo_campo bold">{{destinatario.ie}}</span>
+                    </div>
+                    <div class="column data all-rounded-corners center padding-top">
+                      <div class="tcampo reset-font">HORA DA SAÍDA</div>
+                      <span class="conteudo_campo bold">{{hora_saida}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Faturas  -->
+            {{#if duplicatas}}
+            <div class="columns grupo">
+              <div class="column">
+                <div class="quadro duplicatas">
+                  <div class="columns padding-top">
+                    <div class="column bold">
+                      FATURA/DUPLICATA
+                    </div>
+                  </div>
+                  <div class="columns" id="reset-border-duplicata">
+                    <div class="column">
+                      {{#each duplicatas}}
+                      <div class="duplicata is-pulled-left all-rounded-corners">
+                        <div class="dup-flex reset-marpads">
+                          <div class="font-6 margin-right">Num.</div>
+                          <div class="bold">{{this.numero}}</div>
+                        </div>
+                        <div class="dup-flex reset-marpads">
+                          <div class="font-6 margin-right">Venc.</div>
+                          <div class="bold">{{this.vencimento}}</div>
+                        </div>
+                        <div class="dup-flex reset-marpads">
+                          <div class="font-6 margin-right">Valor</div>
+                          <div class="bold">{{this.valor}}</div>
+                        </div>
+                      </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/if}}
+
+            <!-- Impostos  -->
+            <div class="columns grupo">
+              <div class="column ">
+                <div class="quadro imposto all-rounded-corners">
+                  <div class="columns">
+                    <div class="column bold">
+                      CÁLCULO DO IMPOSTO
+                    </div>
+                  </div>
+                  <div class="columns linha all-rounded-corners">
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">BASE DE CÁLC. DO ICMS</div>
+                      <div class="bold">{{base_calculo_icms}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO ICMS</div>
+                      <div class="bold">{{imposto_icms}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">BASE DE CÁLC. ICMS S.T.</div>
+                      <div class="bold">{{base_calculo_icms_st}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO ICMS SUBST.</div>
+                      <div class="bold">{{imposto_icms_st}}</div>
+                    </div>
+                   {{!--  <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. IMP. IMPORTAÇÃO</div>
+                      <div class="bold">{{valor_ii}}</div>
+                    </div> --}}
+                   {{!--  <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. ICMS UF REMET.</div>
+                      <div class="bold">{{valor_icms_uf_remetente}}</div>
+                    </div> --}}
+                    {{!-- <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO FCP</div>
+                      <div class="bold">{{valor_combate_pobreza}}</div>
+                    </div> --}}
+                    {{!-- <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO PIS</div>
+                      <div class="bold">{{valor_pis}}</div>
+                    </div> --}}
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. TOTAL PRODUTOS</div>
+                      <div class="bold">{{total_produtos}}</div>
+                    </div>
+                  </div>
+                  <div class="columns linha">
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO FRETE</div>
+                      <div class="bold">{{total_frete}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DO SEGURO</div>
+                      <div class="bold">{{total_seguro}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">DESCONTO</div>
+                      <div class="bold">{{total_desconto}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">OUTRAS DESPESAS</div>
+                      <div class="bold">{{total_despesas}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR TOTAL IPI</div>
+                      <div class="bold">{{total_ipi}}</div>
+                    </div>
+                    {{!-- <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. ICMS UF DEST.</div>
+                      <div class="bold">{{valor_icms_uf_destinatario}}</div>
+                    </div> --}}
+                   {{!--  <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. TOT. TRIB.</div>
+                      <div class="bold">{{imposto_tributos}}</div>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">VALOR DA COFINS</div>
+                      <div class="bold">{{valor_cofins}}</div>
+                    </div> --}}
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">V. TOTAL DA NOTA</div>
+                      <div class="bold">{{total_nota}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transportadora -->
+            <div class="columns grupo">
+              <div class="column">
+                <div class="quadro  all-rounded-corners">
+                  <div class="columns">
+                    <div class="column bold">
+                      TRANSPORTADOR/VOLUMES TRANSPORTADOS
+                    </div>
+                  </div>
+                  <div class="columns linha all-rounded-corners">
+                    <div class="column nome all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">RAZÃO SOCIAL</div>
+                      <span class="conteudo_campo bold">{{transportador.nome}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">FRETE POR CONTA</div>
+                      <span class="conteudo_campo bold">{{modalidade_frete}} - {{modalidade_frete_texto}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">CÓDIGO ANTT</div>
+                      <span class="conteudo_campo bold">{{veiculo_antt}}</span>
+                    </div>
+                    <div class="column placa all-rounded-corners padding-top center">
+                      <div class="tcampo reset-font">PLACA DO VEÍCULO</div>
+                      <span class="conteudo_campo bold">{{veiculo_placa}}</span>
+                    </div>
+                    <div class="column uf all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">UF</div>
+                      <span class="conteudo_campo bold">{{veiculo_placa_uf}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top center">
+                      <div class="tcampo reset-font">CNPJ/CPF</div>
+                      <span class="conteudo_campo bold">{{transportador.inscricao_nacional}}</span>
+                    </div>
+                  </div>
+                  <div class="columns linha">
+                    <div class="column nome all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">ENDEREÇO</div>
+                      <span class="conteudo_campo bold">
+                        {{#if transportador.endereco}} {{transportador.endereco}}, {{transportador.numero}} {{/if}}
+                      </span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">MUNICÍPIO</div>
+                      <span class="conteudo_campo bold">{{transportador.municipio}}</span>
+                    </div>
+                    <div class="column uf all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">UF</div>
+                      <span class="conteudo_campo bold">{{transportador.uf}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top center">
+                      <div class="tcampo reset-font">INSCRIÇÃO ESTADUAL</div>
+                      <span class="conteudo_campo bold">{{transportador.ie}}</span>
+                    </div>
+                  </div>
+                  <div class="columns linha">
+                    <div class="column direita all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">QUANTIDADE</div>
+                      <span class="conteudo_campo bold">{{volume_quantidade}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">ESPÉCIE</div>
+                      <span class="conteudo_campo bold">{{volume_especie}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top center">
+                      <div class="tcampo reset-font">MARCA</div>
+                      <span class="conteudo_campo bold">{{volume_marca}}</span>
+                    </div>
+                    <div class="column all-rounded-corners padding-top center">
+                      <div class="tcampo reset-font">NUMERAÇÃO</div>
+                      <span class="conteudo_campo bold">{{volume_numeracao}}</span>
+                    </div>
+                    <div class="column direita all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">PESO BRUTO</div>
+                      <span class="conteudo_campo bold">{{volume_pesoBruto}}</span>
+                    </div>
+                    <div class="column direita all-rounded-corners padding-top">
+                      <div class="tcampo reset-font">PESO LÍQUIDO</div>
+                      <span class="conteudo_campo bold">{{volume_pesoLiquido}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="borderless">
+            <!-- Itens  -->
+            <div class="columns grupo">
+              <div class="column">
+                <div class="quadro">
+                  <div class="columns">
+                    <div class="column bold">
+                      DADOS DOS PRODUTOS/SERVIÇOS
+                    </div>
+                  </div>
+                  <div class="columns all-rounded-corners" id="reset-border-table">
+                    <table class="table itens">
+                      <thead>
+                        <tr>
+                          <th class="top-left-round">CÓDIGO</th>
+                          <th>DESCRIÇÃO</th>
+                          <th>NCM/SH</th>
+                          <th>CST</th>
+                          <th>CFOP</th>
+                          <th>UN.</th>
+                          <th>QUANT.</th>
+                          <th>V.UNIT.</th>
+                         {{!--  <th>V.DESC.</th> --}}
+                          <th>V.TOTAL</th>
+                          <th>BC.ST</th>
+                          <th>V.ST</th>
+                          <th>BC.ICMS</th>
+                          <th>V.ICMS</th>
+                          <th>V.IPI</th>
+                          <th>%ICMS</th>
+                          <th class="top-right-round">%IPI</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each itens}}
+                        <tr>
+                          <td class="{{#if @last}}bottom-left-round{{/if}}">{{this.codigo}}</td>
+                          <td>{{this.descricao}}</td>
+                          <td>{{this.ncm}}</td>
+                          <td>{{this.cst}}</td>
+                          <td>{{this.cfop}}</td>
+                          <td>{{this.unidade}}</td>
+                          <td class="direita">{{this.quantidade}}</td>
+                          <td class="direita">{{this.valor}}</td>
+                          {{!-- <td class="direita">{{this.desconto}}</td> --}}
+                          <td class="direita">{{this.total}}</td>
+                          <td class="direita">{{this.base_calculo_icms_st}}</td>
+                          <td class="direita">{{this.valor_icms_st}}</td>
+                          <td class="direita">{{this.base_calculo}}</td>
+                          <td class="direita">{{this.icms}}</td>
+                          <td class="direita">{{this.ipi}}</td>
+                          <td class="direita">{{this.porcentagem_icms}}</td>
+                          <td class="direita {{#if @last}}bottom-right-round{{/if}}">{{this.porcentagem_ipi}}</td>
+                        </tr>
+                        {{/each}}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Serviço  -->
+    {{#if total_servico}}
+    <div class="columns grupo">
+      <div class="column ">
+        <div class="quadro">
+          <div class="columns">
+            <div class="column bold">
+              CÁLCULO DO ISSQN
+            </div>
+          </div>
+          <div class="columns linha all-rounded-corners">
+            <div class="column padding-top all-rounded-corners center">
+              <div class="tcampo">INSCRIÇÃO MUNICIPAL</div>
+              <span class="conteudo_campo">{{inscricao_municipal}}</span>
+            </div>
+            <div class="column padding-top all-rounded-corners center">
+              <div class="tcampo">VALOR TOTAL DOS SERVIÇOS</div>
+              <div class="conteudo_campo direita">{{total_servico}}</div>
+            </div>
+            <div class="column padding-top all-rounded-corners center">
+              <div class="tcampo">BASE DE CÁLCULO DO ISSQN</div>
+              <div class="conteudo_campo direita">{{base_calculo_issqn}}</div>
+            </div>
+            <div class="column padding-top all-rounded-corners center">
+              <div class="tcampo">VALOR DO ISSQN</div>
+              <div class="conteudo_campo direita">{{total_issqn}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    <!-- Dados Adicionais  -->
+    <div class="columns grupo">
+      <div class="column">
+        <div class="quadro all-rounded-corners">
+          <div class="columns">
+            <div class="column bold">
+              DADOS ADICIONAIS
+            </div>
+          </div>
+          <div class="columns linha complemento all-rounded-corners">
+            <div class="column all-rounded-corners padding-top">
+              <div class="tcampo">INFORMAÇÕES COMPLEMENTARES</div>
+              <span class="conteudo_campo">{{informacoes_fisco}}</span>
+              <span class="conteudo_campo">{{informacoes_complementares}}</span>
+              <span class="conteudo_campo">{{observacao}}</span>
+            </div>
+            <div class="column fisco all-rounded-corners padding-top">
+              <div class="tcampo">RESERVADO AO FISCO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+<!-- Código de Barras  -->
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.8.0/dist/JsBarcode.all.min.js">
+</script>
+<script>
+  JsBarcode("#barcode", "{{ codigo_barras }}", { displayValue: false, height: 35, width: 1 })
+</script>
+
+</html>

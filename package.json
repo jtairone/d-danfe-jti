@@ -1,0 +1,32 @@
+{
+  "name": "d-danfe-jti",
+  "version": "1.0.0",
+  "description": "Visualizador de DANFE em HTML",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "nodeunit test/"
+  },
+  "keywords": [
+    "DANFE",
+    "NFe",
+    "XML",
+    "parser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtairone/d-danfe-jti.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jtairone/d-danfe-jti.git"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.11.3"
+  },
+  "author": "José Tairone Morais (https://github.com/jtairone)",
+  "license": "MIT",
+  "dependencies": {
+    "d-nfe": "^1.3.0",
+    "handlebars": "^4.0.11",
+    "is-url": "^1.2.4"
+  }
+}
