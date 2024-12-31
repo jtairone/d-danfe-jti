@@ -317,8 +317,12 @@ function getTemplateData(nfe, logo) {
   
   let logoData = logo;
   if (logo && !isUrl(logo) && typeof logo === 'string') {
-    const absolutoLogoPath = path.resolve(__dirname, logo);
-    logoData = imageToBase64(absolutoLogoPath); // Converte para Base64 se for um caminho local.
+    try {
+      const absolutoLogoPath = path.join(process.cwd(), logo);
+      logoData = imageToBase64(absolutoLogoPath); // Converte para Base64 se for um caminho local.
+    } catch (err) {
+      throw new Error(`Erro ao converter imagem para Base64: ${err.message}`);
+    }
   }
 
   var data = {

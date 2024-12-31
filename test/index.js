@@ -53,7 +53,7 @@ module.exports.fromXMLTest = (test) => {
   const expectedNumero = '<div>Nº 1054</div>'
 
   // fromXML
-  danfe = fromXML(xml, '../test/img/logo.png')
+  danfe = fromXML(xml, './test/img/logo.png')
   test.ok(danfe.toHtml())
 
   // fromNFe
