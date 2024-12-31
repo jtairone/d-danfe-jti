@@ -317,7 +317,8 @@ function getTemplateData(nfe, logo) {
   
   let logoData = logo;
   if (logo && !isUrl(logo) && typeof logo === 'string') {
-    logoData = imageToBase64(logo); // Converte para Base64 se for um caminho local.
+    const absolutoLogoPath = path.resolve(__dirname, logo);
+    logoData = imageToBase64(absolutoLogoPath); // Converte para Base64 se for um caminho local.
   }
 
   var data = {
