@@ -4,6 +4,7 @@ const TEMPLATE_DANFE = __dirname + '/template-danfe.hbs'
 const fs = require('fs')
 const path = require('path')
 const isUrl = require('is-url')
+const { fileTypeFromBuffer } = require('file-type');
 /**
  * Retorna <valor> especificado com máscara do CPF.
  *
@@ -310,12 +311,12 @@ function imageToBase64(filePath) {
  * @param      {object}  nfe     djf-nfe
  * @return     {object}
  */
-function getTemplateData(nfe, logo) {
+async function getTemplateData(nfe, logo) {
   if (!nfe) {
     return null
   }
   
-  let logoData = logo;
+  /* let logoData = logo;
   if (logo && !isUrl(logo) && typeof logo === 'string') {
     try {
       const absolutoLogoPath = path.join(process.cwd(), logo);
@@ -323,7 +324,31 @@ function getTemplateData(nfe, logo) {
     } catch (err) {
       throw new Error(`Erro ao converter imagem para Base64: ${err.message}`);
     }
+  } */
+
+let logoData = logo;
+// Se for Buffer, converte direto para Base64
+if (Buffer.isBuffer(logo)) {
+  try {
+    const type = await fileTypeFromBuffer(logo); // Usando file-type para detectar MIME type
+    const mimeType = type?.mime || 'image/png'; // Fallback para PNG se não detectar
+    logoData = `data:${mimeType};base64,${logo.toString('base64')}`;
+  } catch (err) {
+    throw new Error(`Erro ao converter Buffer para Base64: ${err.message}`);
   }
+}
+// Se for string (caminho ou URL)
+else if (logo && typeof logo === 'string') {
+  if (!isUrl(logo)) {
+    try {
+      const absolutoLogoPath = path.join(process.cwd(), logo);
+      logoData = imageToBase64(absolutoLogoPath);
+    } catch (err) {
+      throw new Error(`Erro ao converter imagem para Base64: ${err.message}`);
+    }
+  }
+  // Se for URL, mantém como está
+}
 
   var data = {
     operacao: nfe.tipoOperacao(),
@@ -398,9 +423,9 @@ function getTemplateData(nfe, logo) {
  * @param      {<type>}  nfe     djf-nfe
  * @return     {Object}  { description_of_the_return_value }
  */
-function model(nfe, logo) {
+async function model(nfe, logo) {
   return {
-    toHtml: () => renderHtml(getTemplateData(nfe, logo))
+    toHtml: async () => renderHtml(await getTemplateData(nfe, logo))
   }
 }
 
@@ -410,11 +435,11 @@ function model(nfe, logo) {
  * @param      {object}  nfe    djf-nfe
  * @return     {<object>}
  */
-module.exports.fromNFe = function (nfe) {
+module.exports.fromNFe = async function (nfe) {
   if (!nfe || typeof nfe.nrNota !== 'function') {
-    return model(null)
+    return await model(null)
   }
-  return model(nfe)
+  return await model(nfe)
 }
 
 /**
@@ -423,11 +448,11 @@ module.exports.fromNFe = function (nfe) {
  * @param      {string}  xml
  * @return     {<object>}
  */
-module.exports.fromXML = function (xml, logo) {
+module.exports.fromXML = async function (xml, logo) {
   if (!xml || typeof xml !== 'string') {
-    return model(null)
+    return await model(null)
   }
-  return model(NFe(xml), logo)
+  return await model(NFe(xml), logo)
 }
 
 /**

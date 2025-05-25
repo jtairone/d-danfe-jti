@@ -23,9 +23,10 @@ npm i d-danfe-jti
 
 ```javascript
 const danfe = require('d-danfe-jti');
-const logo = 'URL da logomarca da empresa'; // Opcional. Caso não seja informado, o campo ficará vazio.
-const Danfe = danfe.fromXML('conteúdo XML', logo);
-console.log(Danfe.toHtml());
+const logo = 'URL da logomarca da empresa'; // Opcional. Caso não seja informado, o campo ficará vazio. Pode ser passado Buffer.
+//Retorna uma promisse tendo utilizar await.
+const Danfe = await danfe.fromXML('conteúdo XML', logo);
+console.log(await Danfe.toHtml());
 
 ```
 **Dica:** Recomenda-se utilizar serviços como o [Postimage]('https://postimages.org/') para hospedar sua logomarca e fornecer o URL direto da imagem. 
@@ -36,9 +37,9 @@ Sempre passar o caminho relativo, pois será resolvido pelo pacote:
 ```javascript
 const danfe = require('d-danfe-jti');
 
-const logo = './usr/img/logo.png'; // Opcional. Caso não seja informado, o campo ficará vazio.
-const Danfe = danfe.fromXML('conteúdo XML', logo);
-console.log(Danfe.toHtml());
+const logo = './usr/img/logo.png'; // Opcional. Caso não seja informado, o campo ficará vazio. pode ser Buffer.
+const Danfe = await danfe.fromXML('conteúdo XML', logo);
+console.log(await Danfe.toHtml());
 ```
 
 ***Dica:*** Caso precise acessar um arquivo localizado em subpastas, como o `router.js` na estrutura abaixo, ajuste o caminho relativo para voltar um nível na hierarquia.
